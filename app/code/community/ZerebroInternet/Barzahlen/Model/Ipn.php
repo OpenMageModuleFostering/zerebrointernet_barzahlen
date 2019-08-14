@@ -148,11 +148,11 @@ class ZerebroInternet_Barzahlen_Model_Ipn
     protected function _processTransactionExpired()
     {
         $payment = $this->_order->getPayment();
-        
+
         if($transaction = $payment->getTransaction($this->_receivedData['transaction_id'])) {
             $transaction->close();
         }
-        
+
         $this->_order->registerCancellation($this->_createIpnComment(), false)->save();
         $this->_order->sendOrderUpdateEmail(true, $this->_createIpnComment());
     }
