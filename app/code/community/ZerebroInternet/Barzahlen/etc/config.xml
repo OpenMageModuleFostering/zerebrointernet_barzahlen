@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Barzahlen Payment Module for Magento
+ *
+ * @category    ZerebroInternet
+ * @package     ZerebroInternet_Barzahlen
+ * @copyright   Copyright (c) 2014 Cash Payment Solutions GmbH (https://www.barzahlen.de)
+ * @author      Alexander Diebler
+ * @author      Martin Seener
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL-3.0)
+ */
+-->
+<config>
+
+    <modules>
+        <ZerebroInternet_Barzahlen>
+            <version>1.3.0</version>
+        </ZerebroInternet_Barzahlen>
+    </modules>
+
+    <global>
+        <blocks>
+            <barzahlen>
+                <class>ZerebroInternet_Barzahlen_Block</class>
+            </barzahlen>
+        </blocks>
+        <helpers>
+            <barzahlen>
+                <class>ZerebroInternet_Barzahlen_Helper</class>
+            </barzahlen>
+        </helpers>
+        <models>
+            <barzahlen>
+                <class>ZerebroInternet_Barzahlen_Model</class>
+            </barzahlen>
+        </models>
+        <resources>
+            <barzahlen_setup>
+                <setup>
+                    <module>ZerebroInternet_Barzahlen</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </barzahlen_setup>
+            <barzahlen_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </barzahlen_write>
+            <barzahlen_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </barzahlen_read>
+        </resources>
+    </global>
+
+    <frontend>
+        <routers>
+            <barzahlen>
+                <use>standard</use>
+                <args>
+                    <module>ZerebroInternet_Barzahlen</module>
+                    <frontName>barzahlen</frontName>
+                </args>
+            </barzahlen>
+        </routers>
+        <events>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <barzahlen_core_block_abstract_to_html_before>
+                        <type>singleton</type>
+                        <class>barzahlen/observer</class>
+                        <method>insertInfotext</method>
+                    </barzahlen_core_block_abstract_to_html_before>
+                </observers>
+            </core_block_abstract_to_html_before>
+        </events>
+        <translate>
+            <modules>
+                <ZerebroInternet_Barzahlen>
+                    <files>
+                        <default>ZerebroInternet_Barzahlen.csv</default>
+                    </files>
+                </ZerebroInternet_Barzahlen>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <events>
+            <order_cancel_after>
+                <observers>
+                    <barzahlen_observer>
+                        <type>singleton</type>
+                        <class>barzahlen/barzahlen</class>
+                        <method>cancelPaymentSlip</method>
+                    </barzahlen_observer>
+                </observers>
+            </order_cancel_after>
+            <admin_session_user_login_success>
+                <observers>
+                    <barzahlen_observer>
+                        <type>singleton</type>
+                        <class>barzahlen/observer</class>
+                        <method>checkVersion</method>
+                    </barzahlen_observer>
+                </observers>
+            </admin_session_user_login_success>
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <barzahlen_core_block_abstract_prepare_layout_before>
+                        <type>singleton</type>
+                        <class>barzahlen/observer</class>
+                        <method>addGridButtons</method>
+                    </barzahlen_core_block_abstract_prepare_layout_before>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+        </events>
+        <translate>
+            <modules>
+                <ZerebroInternet_Barzahlen>
+                    <files>
+                        <default>ZerebroInternet_Barzahlen.csv</default>
+                    </files>
+                </ZerebroInternet_Barzahlen>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <default>
+        <payment>
+            <barzahlen>
+                <model>barzahlen/barzahlen</model>
+                <title>Barzahlen</title>
+                <active>0</active>
+                <order_status>pending</order_status>
+                <allowspecific>1</allowspecific>
+                <specificcountry>DE</specificcountry>
+                <max_order_total>999.99</max_order_total>
+                <sort_order>-1</sort_order>
+                <payment_action>order</payment_action>
+            </barzahlen>
+        </payment>
+    </default>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <ZerebroInternet_Barzahlen />
+            </modules>
+        </suite>
+    </phpunit>
+
+</config>
