@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/ZerebroInternet_Barzahlen",
+    "name": "openmage-module-fostering\/zerebrointernet_barzahlen",
     "type": "magento-module",
-    "license": "Open-Source-License-(OSL)-3.0",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "Barzahlen.de Payment Method Plugin",
     "authors": [
