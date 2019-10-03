@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/ZerebroInternet_Barzahlen",
+    "name": "OpenMageModuleFostering\/ZerebroInternet_Barzahlen",
     "type": "magento-module",
     "license": "Open-Source-License-(OSL)-3.0",
     "homepage": "",
     "description": "Barzahlen.de Payment Method Plugin",
     "authors": [
-    {
-        "name": "Alexander Diebler",
-        "email": "support@barzahlen.de"
-    }
-],
+        {
+            "name": "Alexander Diebler",
+            "email": "support@barzahlen.de"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
